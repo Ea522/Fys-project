@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket demo</title>
+        <style type="text/css">
+            body {
+                font-family: "Courier New", sans-serif;
+                text-align: center;
+            }
+            
+        </style>
+    </head>
+    <body>
+        
+        <div class="data">
+            <h1>LDR waarden</h1>
+            <p class='ldr-data'></p>
+        </div>
+        <script>
+            var ldrData = document.querySelector('.ldr-data'),
+                websocket = new WebSocket("ws://127.0.0.1:6789/");
+            minus.onclick = function (event) {
+                websocket.send(JSON.stringify({action: 'minus'}));
+            }
+           
+            websocket.onmessage = function (event) {
+                data = event.data
+                ldrData.textContent = data
+                //data = JSON.parse(event.data);
+                /*switch (data.type) {
+                    case 'state':
+                        value.textContent = data.value+' '+data.data;
+                        break;
+                    case 'users':
+                        users.textContent = (
+                            data.count.toString() + " user" +
+                            (data.count == 1 ? "" : "s"));
+                        break;
+                    default:
+                        console.error(
+                            "unsupported event", data);
+                }
+            };*/
+        </script>
+    </body>
+</html>
